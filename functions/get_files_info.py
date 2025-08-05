@@ -1,4 +1,7 @@
 import os
+from google import genai
+from google.genai import types
+
 def get_files_info(working_directory, directory="."):
     working_dir = os.path.join(working_directory, directory)
     absolute_path = os.path.abspath(working_dir)
@@ -19,3 +22,17 @@ def dir_string_builder(absolute_path, dir_list):
         except Exception as e:
             return(f'Error: operation failed with {e}')
     return dir_string
+
+schema_get_files_info = types.FunctionDeclaration(
+    name="get_files_info",
+    description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)

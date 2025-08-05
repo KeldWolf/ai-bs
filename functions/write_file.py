@@ -8,7 +8,7 @@ def write_file(working_directory, file_path, content):
         working_dir = os.path.join(working_directory, file_path)
         absolute_path = os.path.abspath(working_dir)
         if working_directory not in absolute_path:
-            return(f'Error: Cannot write to "{file_path}" as it is outside the permitted working directory')
+            return f'Error: Cannot write to "{file_path}" as it is outside the permitted working directory'
         if os.path.exists(os.path.dirname(absolute_path)) == False:
             os.makedirs(os.path.dirname(absolute_path))
         with open(absolute_path, "w") as f:
